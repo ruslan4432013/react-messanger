@@ -1,6 +1,9 @@
-body {
+html, body {
     background: linear-gradient(180deg, #1E1F29 0%, #272B4B 100%) no-repeat;
-    height: 100vh;
+    height: 100%;
+}
+body {
+    height: auto;
 }
 
 .messages {
@@ -10,5 +13,6 @@ body {
     align-items: start;
     padding-left: 15px;
     padding-top: 15px;
+    padding-bottom: 50px;
     box-sizing: border-box;
 }
