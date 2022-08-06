@@ -1,0 +1,32 @@
+.form {
+  position: fixed;
+  display: flex;
+  bottom: 15px;
+  width: 100vw;
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+
+.inputMessage {
+  flex: 1;
+  border-radius: 30px;
+  padding-left: 15px;
+  font-size: 20px;
+  outline: none;
+}
+
+.buttonSend {
+  background: #6967D2;
+  border-radius: 20px;
+  color: white;
+  padding: 10px;
+  margin-left: 25px;
+  border: none;
+  font-weight: bold;
+
+  &:active {
+    background: #464693;
+    transform: scale(0.9);
+  }
+}
+
