@@ -1,14 +1,18 @@
 .wrapper {
-  width: 100vw;
-  height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  background: #6967D2;
+  border-radius: 30px;
+  width: fit-content;
+  padding: 0 28px 17px 12px;
+  color: white;
+  margin-bottom: 15px;
 }
 
-.message {
-  background: #61dafb;
-  color: white;
-  border-radius: 20px;
-  width: 200px;
+.author {
+  background: #E63C7F;
+  width: fit-content;
+  border-radius: 30px;
+  padding: 5px 10px;
+  margin-bottom: 10px;
 }
