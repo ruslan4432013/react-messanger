@@ -1,6 +1,6 @@
 html, body {
     background: linear-gradient(180deg, #1E1F29 0%, #272B4B 100%) no-repeat;
-    height: 100%;
+    min-height: 100vh;
 }
 body {
     height: auto;
@@ -10,7 +10,7 @@ body {
     display: flex;
     flex-direction: column;
     width: 100%;
-    align-items: start;
+    align-items: flex-start;
     padding-left: 15px;
     padding-top: 15px;
     padding-bottom: 50px;
