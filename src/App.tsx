@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import './App.css';
+import './App.scss';
 import {Message} from "./components/Message/Message";
 import {MessageType} from "./types/MessageType";
 import {SendMessageForm} from "./components/SendMessageForm/SendMessageForm";
+import {ChatList} from "./components/ChatList/ChatList";
+import {Box} from "@mui/material";
 
 const author = 'Неопознанный енот'
 const robotName = 'Robot'
@@ -43,12 +45,19 @@ function App() {
 
 
     return (
-        <div className="App">
-            <div className={'messages'}>
-                {messageList.map(m => <Message key={m._id} message={m}/>)}
+
+            <div className="App">
+                <Box sx={{display: 'flex', height: '100%'}}>
+                    <ChatList/>
+                    <Box sx={{paddingLeft: '230px', boxSizing: 'border-box', width: '100%', height: '100%'}}>
+                        <div className={'messages'}>
+                            {messageList.map(m => <Message key={m._id} message={m}/>)}
+                        </div>
+                        <SendMessageForm addMessage={addMessage}/>
+                    </Box>
+                </Box>
             </div>
-            <SendMessageForm addMessage={addMessage}/>
-        </div>
+
     );
 }
 
