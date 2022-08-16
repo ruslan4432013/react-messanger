@@ -1,34 +1,44 @@
-import {ChatItemProps} from "./ChatList.props";
-import {useState, MouseEvent} from "react";
+import {ChatItemProps, ChatListProps} from "./ChatList.props";
 import {Box, List, ListItemButton, ListItemText} from "@mui/material";
-import {chatListMock} from "../../mock/ChatListMock";
+import {Link, useNavigate, useParams} from "react-router-dom";
+import {RoutesConst} from "../../pages/paths";
+import {useEffect} from "react";
 
-const ChatItem = ({id, name, selectedIndex, handleListItemClick}: ChatItemProps): JSX.Element => {
+const ChatItem = ({id, name, selectedIndex}: ChatItemProps): JSX.Element => {
     return (
         <ListItemButton
+            component={Link}
+            to={`${RoutesConst.CHAT}/${id}`}
             sx={{
                 '&.Mui-selected': {
                     background: (theme) => theme.palette.background.paper
                 }
             }}
-            selected={selectedIndex === id}
-            onClick={(event) => handleListItemClick(event, id)}
+            selected={selectedIndex === `${id}`}
         >
-            <ListItemText sx={{color: (theme) => theme.palette.primary.contrastText}} primary={name}/>
+            <ListItemText sx={{color: 'white'}}>
+                {name}
+            </ListItemText>
         </ListItemButton>
     )
 }
 
 
-export const ChatList = (): JSX.Element => {
-    const [selectedIndex, setSelectedIndex] = useState(1);
+export const ChatList = ({chatList}: ChatListProps): JSX.Element => {
 
-    const handleListItemClick = (
-        event: MouseEvent,
-        index: number,
-    ) => {
-        setSelectedIndex(index);
-    };
+    const {chatID} = useParams<{ chatID: string }>()
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (chatID) {
+            const chats = chatList.filter(chat => chat.id === +chatID)
+            if (chats.length === 0) {
+                navigate(RoutesConst.NO_CHAT, {replace: true})
+            }
+        }
+    }, [chatID, chatList, navigate])
+
+
     return (
         <Box sx={{
             width: '220px',
@@ -38,12 +48,11 @@ export const ChatList = (): JSX.Element => {
             borderRight: '1px solid white'
         }}>
             <List component="nav" aria-label="main mailbox folders">
-                {chatListMock.map(item => (
-                    <ChatItem
+                {chatList.map(item => (
+                    chatID && <ChatItem
                         key={item.id}
                         {...item}
-                        handleListItemClick={handleListItemClick}
-                        selectedIndex={selectedIndex}
+                        selectedIndex={chatID}
                     />))
                 }
             </List>
