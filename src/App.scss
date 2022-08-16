@@ -1,18 +1,17 @@
 html, body {
-    background: linear-gradient(180deg, #1E1F29 0%, #272B4B 100%) no-repeat;
-    min-height: 100vh;
+  background: linear-gradient(180deg, #1E1F29 0%, #272B4B 100%) no-repeat;
+  min-height: 100vh;
 }
+
 body {
-    height: auto;
+  height: auto;
 }
 
 .messages {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: flex-start;
-    padding-left: 15px;
-    padding-top: 15px;
-    padding-bottom: 50px;
-    box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: flex-start;
+  padding: 15px 15px 50px;
+  box-sizing: border-box;
 }

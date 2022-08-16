@@ -6,7 +6,7 @@ import {SendMessageForm} from "./components/SendMessageForm/SendMessageForm";
 import {ChatList} from "./components/ChatList/ChatList";
 import {Box} from "@mui/material";
 
-const author = 'Неопознанный енот'
+export const author = 'Неопознанный енот'
 const robotName = 'Robot'
 const robotAnswer = 'Сообщение успешно отправлено'
 let timerID: NodeJS.Timeout;
