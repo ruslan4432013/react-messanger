@@ -2,15 +2,18 @@ import {ChatList, MessageList, SendMessageForm} from "../../components";
 import {Box} from "@mui/material";
 import React, {useEffect} from "react";
 import {MessangerProps} from "./Messanger.props";
+import {useSelector} from "react-redux";
+import {RootState} from "../../store/store";
 
 
-export const author = 'Неопознанный енот'
 const robotName = 'Robot'
 const robotAnswer = 'Сообщение успешно отправлено'
 let timerID: NodeJS.Timeout;
 
 
 export const Messanger = ({setMessageList, messageList, chatList}: MessangerProps): JSX.Element => {
+
+    const author = useSelector((state: RootState) => state.profile.name)
 
     useEffect(() => {
         const lastMessage = messageList?.slice(-1)[0]
@@ -32,11 +35,14 @@ export const Messanger = ({setMessageList, messageList, chatList}: MessangerProp
 
 
     const addMessage = (message: string): void => {
+
         setMessageList((perv) => [...perv, {
             _id: perv.slice(-1)[0]?._id + 1 || 0,
-            author,
+            author: author,
             text: message
         }])
+
+
     }
 
     return (
