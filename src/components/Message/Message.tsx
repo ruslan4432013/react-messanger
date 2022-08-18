@@ -1,7 +1,8 @@
 import {MessageProps} from "./Message.props";
 import styles from './Message.module.scss'
 import cn from 'classnames'
-import {author} from "../../App";
+import {author} from "../../pages";
+
 
 export const Message = ({message}: MessageProps): JSX.Element => {
 

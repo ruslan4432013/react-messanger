@@ -1,4 +1,3 @@
-import {MouseEvent} from "react";
 
 export type ChatItemType = {
     id: number
@@ -6,6 +5,10 @@ export type ChatItemType = {
 }
 
 export type ChatItemProps = {
-    selectedIndex: number,
-    handleListItemClick: (event: MouseEvent, index: number) => void
+    selectedIndex: string,
 } & ChatItemType
+
+
+export type ChatListProps = {
+    chatList: ChatItemType[]
+}
