@@ -1,14 +1,8 @@
-
-export type ChatItemType = {
-    id: number
-    name: string,
-}
+import {ChatItemType} from "../../types/ChatListType";
 
 export type ChatItemProps = {
     selectedIndex: string,
 } & ChatItemType
 
 
-export type ChatListProps = {
-    chatList: ChatItemType[]
-}
+

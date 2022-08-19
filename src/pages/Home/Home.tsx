@@ -1,10 +1,17 @@
-import {Box, Button, Typography} from "@mui/material";
-import {HomeProps} from "./Home.props";
+import {Box, Button, IconButton, Typography} from "@mui/material";
+import DeleteIcon from '@mui/icons-material/Delete';
+import {Fragment} from "react";
 import {Link} from 'react-router-dom'
 import {RoutesConst} from "../paths";
+import {AddChatModal} from "../../components";
+import {useSelector} from "react-redux";
+import {getChats} from "../../store/chats/selectors";
+import {removeChat} from "../../store";
 
-export const Home = ({chatList}: HomeProps): JSX.Element => {
 
+export const Home = (): JSX.Element => {
+
+    const chatList = useSelector(getChats)
 
     return (
         <Box sx={{
@@ -15,15 +22,41 @@ export const Home = ({chatList}: HomeProps): JSX.Element => {
             justifyItems: 'center'
         }}>
             <Typography color={'white'} sx={{marginBottom: 5}} variant={'h1'}>Список всех чатов</Typography>
-            {chatList.map(chat => <Button component={Link}
-                                          to={`${RoutesConst.CHAT}/${chat.id}`}
-                                          size={'large'}
-                                          variant={'outlined'}
-                                          sx={{color: 'white', width: '200px', mb: 3}}
-                                          key={chat.id}
+            <Box
+                sx={{
+                    display: 'grid',
+                    gridTemplateColumns: '200px 30px',
+                    columnGap: '20px',
+                    alignItems:'flex-start',
+
+                }}
             >
-                {chat.name}
-            </Button>)}
+                {chatList.map(chat => (
+                    <Fragment key={chat.id}>
+                        <Button component={Link}
+                                to={`${RoutesConst.CHAT}/${chat.id}`}
+                                size={'large'}
+                                variant={'outlined'}
+                                sx={{
+                                    color: 'white',
+                                    width: '200px',
+                                    mb: 3
+                                }}
+
+                        >
+                            {chat.name}
+                        </Button>
+                        <IconButton onClick={() => removeChat(chat.id)}
+                                    color="error"
+                                    edge="end"
+                                    aria-label="delete">
+                            <DeleteIcon/>
+                        </IconButton>
+                    </Fragment>)
+                )}
+            </Box>
+            <AddChatModal variant={'button'}/>
         </Box>
+
     )
 }

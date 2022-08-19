@@ -1,10 +1,15 @@
-import {ChatItemProps, ChatListProps} from "./ChatList.props";
+import {ChatItemProps} from "./ChatList.props";
 import {Box, List, ListItemButton, ListItemText} from "@mui/material";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {RoutesConst} from "../../pages/paths";
 import {useEffect} from "react";
+import {AddChatModal} from "../Modal/Modal";
+import {useSelector} from "react-redux";
+import {getChats} from "../../store/chats/selectors";
 
 const ChatItem = ({id, name, selectedIndex}: ChatItemProps): JSX.Element => {
+
+
     return (
         <ListItemButton
             component={Link}
@@ -24,10 +29,12 @@ const ChatItem = ({id, name, selectedIndex}: ChatItemProps): JSX.Element => {
 }
 
 
-export const ChatList = ({chatList}: ChatListProps): JSX.Element => {
+export const ChatList = (): JSX.Element => {
 
     const {chatID} = useParams<{ chatID: string }>()
     const navigate = useNavigate()
+    const chatList = useSelector(getChats)
+
 
     useEffect(() => {
         if (chatID) {
@@ -55,6 +62,7 @@ export const ChatList = ({chatList}: ChatListProps): JSX.Element => {
                         selectedIndex={chatID}
                     />))
                 }
+                <AddChatModal variant={'list'}/>
             </List>
         </Box>
     )

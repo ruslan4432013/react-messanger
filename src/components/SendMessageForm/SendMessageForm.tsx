@@ -1,19 +1,33 @@
 import {ChangeEvent, SyntheticEvent, useEffect, useRef, useState} from "react";
-import {SendMessageFormProps} from "./SendMessageForm.props";
 import {Box, Button, TextField} from "@mui/material";
+import {addMessage} from "../../store";
+import {useSelector} from "react-redux";
+import {getMessages} from "../../store/messages/selectors";
+import {getUserName} from "../../store/profile/selectors";
 
-export const SendMessageForm = ({addMessage}: SendMessageFormProps): JSX.Element => {
+export const SendMessageForm = (): JSX.Element => {
 
     const [message, setMessage] = useState<string>('')
     const inputRef = useRef<HTMLInputElement>(null)
+    const messageList = useSelector(getMessages)
+    const author = useSelector(getUserName)
 
     useEffect(() => {
         inputRef.current?.focus()
     }, [inputRef])
 
+    const createNewMessage = (message: string): void => {
+        addMessage({
+            _id: messageList.slice(-1)[0]?._id + 1 || 0,
+            author: author,
+            text: message
+        })
+    }
+
+
     const handleSubmit = (e: SyntheticEvent): void => {
         e.preventDefault()
-        message && addMessage(message)
+        message && createNewMessage(message)
         setMessage('')
         inputRef.current?.focus()
     }
