@@ -1,10 +1,14 @@
 import {MessageProps} from "./Message.props";
 import styles from './Message.module.scss'
 import cn from 'classnames'
-import {author} from "../../pages";
+import {useSelector} from "react-redux";
+import {RootState} from "../../store/store";
+
 
 
 export const Message = ({message}: MessageProps): JSX.Element => {
+
+    const author = useSelector((state: RootState) => state.profile.name)
 
     return (
         <div
