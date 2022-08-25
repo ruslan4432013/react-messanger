@@ -4,23 +4,31 @@ import {addMessage} from "../../store";
 import {useSelector} from "react-redux";
 import {getMessages} from "../../store/messages/selectors";
 import {getUserName} from "../../store/profile/selectors";
+import {useParams} from "react-router-dom";
 
 export const SendMessageForm = (): JSX.Element => {
 
     const [message, setMessage] = useState<string>('')
     const inputRef = useRef<HTMLInputElement>(null)
-    const messageList = useSelector(getMessages)
+    const messages = useSelector(getMessages)
     const author = useSelector(getUserName)
+    const {chatID} = useParams<{ chatID: string }>()
+
+    const messageList = chatID && messages[+chatID]
 
     useEffect(() => {
         inputRef.current?.focus()
     }, [inputRef])
 
     const createNewMessage = (message: string): void => {
-        addMessage({
-            _id: messageList.slice(-1)[0]?._id + 1 || 0,
+        const newMessage = {
+            _id: Array.isArray(messageList) ? messageList.length : 0,
             author: author,
             text: message
+        }
+        addMessage({
+            chatID: chatID ? +chatID : 0,
+            message: newMessage
         })
     }
 

@@ -3,3 +3,7 @@ export type MessageType = {
     text: string,
     author: string
 }
+
+export type TMessages = {
+    [chatID: number]: MessageType[]
+}

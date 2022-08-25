@@ -29,7 +29,6 @@ function App() {
                         <Route path={RoutesConst.PROFILE} element={<Profile/>}/>
                         <Route path={RoutesConst.NO_CHAT} element={<ChatNotFound/>}/>
                         <Route path='*' element={<NotFound/>}/>
-
                     </Routes>
                 </Box>
             </BrowserRouter>

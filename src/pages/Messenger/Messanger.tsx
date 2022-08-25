@@ -4,6 +4,7 @@ import React, {useEffect} from "react";
 import {useSelector} from "react-redux";
 import {getMessages} from "../../store/messages/selectors";
 import {addMessage} from "../../store";
+import {useParams} from "react-router-dom";
 
 
 const robotName = 'Robot'
@@ -13,24 +14,34 @@ let timerID: NodeJS.Timeout;
 
 export const Messanger = (): JSX.Element => {
 
-    const messageList = useSelector(getMessages)
+    const message = useSelector(getMessages)
+    const {chatID} = useParams<{ chatID: string }>()
+
+    const currentMessageList = chatID && message[+chatID]
+
 
     useEffect(() => {
-        const lastMessage = messageList?.slice(-1)[0]
+        const lastMessage = currentMessageList && currentMessageList.slice(-1)[0]
 
 
         if (lastMessage && lastMessage.author !== robotName) {
+
+            const newMessage = {
+                _id: lastMessage._id + 1 || 0,
+                author: robotName,
+                text: robotAnswer
+            }
+
             timerID = setTimeout(() => addMessage({
-                    _id: lastMessage._id + 1 || 0,
-                    author: robotName,
-                    text: robotAnswer
+                    chatID: +chatID || 0,
+                    message: newMessage
                 }
             ), 1500)
         }
 
         return () => clearTimeout(timerID)
 
-    }, [messageList])
+    }, [message, chatID, currentMessageList])
 
 
     return (
@@ -38,7 +49,7 @@ export const Messanger = (): JSX.Element => {
             <ChatList/>
             <Box sx={{paddingLeft: '230px', boxSizing: 'border-box', width: '100%', height: '100%'}}>
                 <div className={'messages'}>
-                    <MessageList messageList={messageList}/>
+                    <MessageList messageList={currentMessageList || []}/>
                 </div>
                 <SendMessageForm/>
             </Box>

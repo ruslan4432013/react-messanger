@@ -1,4 +1,4 @@
-import {bindActionCreators, createSlice, PayloadAction} from "@reduxjs/toolkit";
+import { createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 
 export type ProfileState = {
@@ -11,7 +11,7 @@ const initialState = {showName: false, name: 'Неопознанный енот'
 
 
 const profileSlice = createSlice({
-    name: 'counter',
+    name: 'profile',
     initialState,
     reducers: {
         switchShowName(state) {
