@@ -2,7 +2,7 @@ import {MessageProps} from "./Message.props";
 import styles from './Message.module.scss'
 import cn from 'classnames'
 import {useSelector} from "react-redux";
-import {RootState} from "../../store/store";
+import {RootState} from "../../store";
 
 
 

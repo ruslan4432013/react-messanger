@@ -1,4 +1,4 @@
-import {ChatItemType} from "../components/ChatList/ChatList.props";
+import {ChatItemType} from "../types/ChatListType";
 
 export const chatListMock: ChatItemType[] = [
     {
@@ -19,6 +19,6 @@ export const chatListMock: ChatItemType[] = [
     },
     {
         id: 5,
-        name: 'MaterialUI'
+        name: 'Material UI'
     }
 ]
