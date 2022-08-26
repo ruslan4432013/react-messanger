@@ -1,15 +1,15 @@
-import {ChatList, MessageList, SendMessageForm} from "../../components";
-import {Box} from "@mui/material";
-import React, {useEffect} from "react";
+// hooks
 import {useSelector} from "react-redux";
-import {getMessages} from "../../store/messages/selectors";
-import {addMessage} from "../../store";
 import {useParams} from "react-router-dom";
 
+// own components
+import {ChatList, MessageList, SendMessageFormContainer} from "../../components";
 
-const robotName = 'Robot'
-const robotAnswer = 'Сообщение успешно отправлено'
-let timerID: NodeJS.Timeout;
+// material ui components
+import {Box} from "@mui/material";
+
+//selectors
+import {getMessages} from "../../store/messages";
 
 
 export const Messanger = (): JSX.Element => {
@@ -20,30 +20,6 @@ export const Messanger = (): JSX.Element => {
     const currentMessageList = chatID && message[+chatID]
 
 
-    useEffect(() => {
-        const lastMessage = currentMessageList && currentMessageList.slice(-1)[0]
-
-
-        if (lastMessage && lastMessage.author !== robotName) {
-
-            const newMessage = {
-                _id: lastMessage._id + 1 || 0,
-                author: robotName,
-                text: robotAnswer
-            }
-
-            timerID = setTimeout(() => addMessage({
-                    chatID: +chatID || 0,
-                    message: newMessage
-                }
-            ), 1500)
-        }
-
-        return () => clearTimeout(timerID)
-
-    }, [message, chatID, currentMessageList])
-
-
     return (
         <>
             <ChatList/>
@@ -51,7 +27,7 @@ export const Messanger = (): JSX.Element => {
                 <div className={'messages'}>
                     <MessageList messageList={currentMessageList || []}/>
                 </div>
-                <SendMessageForm/>
+                <SendMessageFormContainer/>
             </Box>
         </>
     )

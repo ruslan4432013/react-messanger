@@ -1,49 +1,17 @@
-import {ChangeEvent, SyntheticEvent, useEffect, useRef, useState} from "react";
 import {Box, Button, TextField} from "@mui/material";
-import {addMessage} from "../../store";
-import {useSelector} from "react-redux";
-import {getMessages} from "../../store/messages/selectors";
-import {getUserName} from "../../store/profile/selectors";
-import {useParams} from "react-router-dom";
+import {ChangeEvent, forwardRef, SyntheticEvent} from "react";
 
-export const SendMessageForm = (): JSX.Element => {
+type SendMessageFormProps = {
+    handleChange: (e: ChangeEvent<HTMLInputElement>) => void
+    handleSubmit: (e: SyntheticEvent) => void
+    message: string
+}
 
-    const [message, setMessage] = useState<string>('')
-    const inputRef = useRef<HTMLInputElement>(null)
-    const messages = useSelector(getMessages)
-    const author = useSelector(getUserName)
-    const {chatID} = useParams<{ chatID: string }>()
-
-    const messageList = chatID && messages[+chatID]
-
-    useEffect(() => {
-        inputRef.current?.focus()
-    }, [inputRef])
-
-    const createNewMessage = (message: string): void => {
-        const newMessage = {
-            _id: Array.isArray(messageList) ? messageList.length : 0,
-            author: author,
-            text: message
-        }
-        addMessage({
-            chatID: chatID ? +chatID : 0,
-            message: newMessage
-        })
-    }
-
-
-    const handleSubmit = (e: SyntheticEvent): void => {
-        e.preventDefault()
-        message && createNewMessage(message)
-        setMessage('')
-        inputRef.current?.focus()
-    }
-
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setMessage(e.target.value)
-    }
-
+export const SendMessageForm = forwardRef<HTMLInputElement, SendMessageFormProps>(({
+                                                                                       handleSubmit,
+                                                                                       message,
+                                                                                       handleChange
+                                                                                   }, inputRef) => {
     return (
         <Box
             sx={{
@@ -82,5 +50,5 @@ export const SendMessageForm = (): JSX.Element => {
                 }
             })}>Send message</Button>
         </Box>
-    );
-}
+    )
+})

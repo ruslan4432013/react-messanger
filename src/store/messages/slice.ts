@@ -1,13 +1,10 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {MessageType, TMessages} from "../../types/MessageType";
+import {TPayloadAddMessage} from "./types";
+import {sendResponseFromBot} from "./actions";
+import {Authors} from "../../config";
 
 const initialState = {} as TMessages
-
-type TPayloadAddMessage = {
-    chatID: number
-    message: MessageType
-
-}
 
 const messageSlice = createSlice({
     name: 'messages',
@@ -22,9 +19,28 @@ const messageSlice = createSlice({
             } else {
                 state[chatID] = [message]
             }
-
-        },
+        }
     },
+    extraReducers: (builder) => {
+        builder.addCase(sendResponseFromBot.fulfilled, (state, action) => {
+
+            const chatID = action.payload
+
+            const currentMessageList = state[chatID],
+                lastMessage = currentMessageList.slice(-1)[0]
+
+            if (lastMessage && lastMessage.author !== Authors.BOT.name) {
+                const newMessage: MessageType = {
+                    _id: currentMessageList.length,
+                    author: Authors.BOT.name,
+                    text: Authors.BOT.answer
+                }
+                currentMessageList.push(newMessage)
+            }
+
+
+        })
+    }
 })
 
 export const messageActions = messageSlice.actions

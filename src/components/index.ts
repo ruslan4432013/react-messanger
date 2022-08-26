@@ -1,4 +1,4 @@
-export * from './SendMessageForm/SendMessageForm';
+export * from './SendMessageForm/SendMessageFormContainer';
 export * from './ChatList/ChatList';
 export * from './Message/Message';
 export * from './AppBarContent/AppBarContent';

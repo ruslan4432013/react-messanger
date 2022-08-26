@@ -6,7 +6,6 @@ import Menu from '@mui/material/Menu';
 
 import MenuIcon from '@mui/icons-material/Menu';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
@@ -15,7 +14,7 @@ import {Link as RouterLink} from "react-router-dom";
 import {RoutesConst} from "../../pages/paths";
 
 
-// const pages = ['Products', 'Pricing', 'Blog'];
+
 
 const settings = {
     Profile: RoutesConst.PROFILE,
