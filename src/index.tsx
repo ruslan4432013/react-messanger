@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import Messanger from './Messanger/Messanger';
 import reportWebVitals from './reportWebVitals';
 import {theme} from "./styles/createTheme";
 import {ThemeProvider} from "@mui/material";
@@ -16,7 +16,7 @@ root.render(
         <Provider store={store}>
             <ThemeProvider theme={theme}>
                 <PersistGate loading={null} persistor={persistor}>
-                    <App/>
+                    <Messanger/>
                 </PersistGate>
             </ThemeProvider>
         </Provider>

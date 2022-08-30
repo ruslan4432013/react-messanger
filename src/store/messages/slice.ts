@@ -2,7 +2,7 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {MessageType, TMessages} from "../../types/MessageType";
 import {TPayloadAddMessage} from "./types";
 import {sendResponseFromBot} from "./actions";
-import {Authors} from "../../config";
+import {AUTHORS} from "../../config";
 
 const initialState = {} as TMessages
 
@@ -32,11 +32,11 @@ const messageSlice = createSlice({
             const currentMessageList = state[chatID],
                 lastMessage = currentMessageList.slice(-1)[0]
 
-            if (lastMessage && lastMessage.author !== Authors.BOT.name) {
+            if (lastMessage && lastMessage.author !== AUTHORS.BOT.name) {
                 const newMessage: MessageType = {
                     _id: currentMessageList.length,
-                    author: Authors.BOT.name,
-                    text: Authors.BOT.answer
+                    author: AUTHORS.BOT.name,
+                    text: AUTHORS.BOT.answer
                 }
                 currentMessageList.push(newMessage)
             }

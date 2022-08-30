@@ -1,17 +1,17 @@
 import React from 'react';
-import './App.scss';
-import {AppBarContent} from "./components";
+import './Messanger.scss';
+import {AppBarContent} from "../components";
 import {AppBar, Box} from "@mui/material";
 import {
     BrowserRouter,
     Routes,
     Route,
 } from "react-router-dom";
-import {Home, Messanger, NotFound, Profile, ChatNotFound} from "./pages";
-import {RoutesConst} from "./pages/paths";
+import {Home, MessangerChat, NotFound, Profile, ChatNotFound} from "./pages";
+import {ROUTES} from "../config/paths";
 
 
-function App() {
+function Messanger() {
 
     return (
 
@@ -22,12 +22,12 @@ function App() {
                 </AppBar>
                 <Box sx={{display: 'flex', height: '100%', pt: '64px'}}>
                     <Routes>
-                        <Route path={RoutesConst.MAIN} element={<Home/>}/>
+                        <Route path={ROUTES.MAIN} element={<Home/>}/>
 
-                        <Route path={RoutesConst.CHAT_WITH_ID}
-                               element={<Messanger/>}/>
-                        <Route path={RoutesConst.PROFILE} element={<Profile/>}/>
-                        <Route path={RoutesConst.NO_CHAT} element={<ChatNotFound/>}/>
+                        <Route path={ROUTES.CHAT_WITH_ID}
+                               element={<MessangerChat/>}/>
+                        <Route path={ROUTES.PROFILE} element={<Profile/>}/>
+                        <Route path={ROUTES.NO_CHAT} element={<ChatNotFound/>}/>
                         <Route path='*' element={<NotFound/>}/>
                     </Routes>
                 </Box>
@@ -37,4 +37,4 @@ function App() {
     );
 }
 
-export default App;
+export default Messanger;

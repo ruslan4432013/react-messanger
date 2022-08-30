@@ -1,4 +1,4 @@
-export const Authors = {
+export const AUTHORS = {
     BOT: {
         name: 'Robot',
         answer: 'Сообщение успешно отправлено'

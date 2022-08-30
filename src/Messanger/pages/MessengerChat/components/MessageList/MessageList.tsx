@@ -1,5 +1,5 @@
 import {MessageListProps} from "./MessageList.props";
-import {MessageContainer} from "../Message/MessageContainer";
+import {MessageContainer} from "../Message";
 
 export const MessageList = ({messageList}: MessageListProps): JSX.Element => {
 

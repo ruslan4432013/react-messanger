@@ -11,14 +11,14 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import {useState, MouseEvent} from "react";
 import {Link as RouterLink} from "react-router-dom";
-import {RoutesConst} from "../../pages/paths";
+import {ROUTES} from "../../config/paths";
 
 
 
 
 const settings = {
-    Profile: RoutesConst.PROFILE,
-    Logout: RoutesConst.LOGOUT
+    Profile: ROUTES.PROFILE,
+    Logout: ROUTES.LOGOUT
 }
 
 export const AppBarContent = () => {
@@ -50,7 +50,7 @@ export const AppBarContent = () => {
                     variant="h6"
                     noWrap
                     component={RouterLink}
-                    to={RoutesConst.MAIN}
+                    to={ROUTES.MAIN}
                     sx={{
                         mr: 2,
                         display: {xs: 'none', md: 'flex'},

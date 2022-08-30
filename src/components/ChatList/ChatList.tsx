@@ -1,7 +1,7 @@
 import {ChatItemProps} from "./ChatList.props";
 import {Box, List, ListItemButton, ListItemText} from "@mui/material";
 import {Link, useNavigate, useParams} from "react-router-dom";
-import {RoutesConst} from "../../pages/paths";
+import {ROUTES} from "../../config/paths";
 import {useEffect} from "react";
 import {AddChatModal} from "../Modal/Modal";
 import {useSelector} from "react-redux";
@@ -13,7 +13,7 @@ const ChatItem = ({id, name, selectedIndex}: ChatItemProps): JSX.Element => {
     return (
         <ListItemButton
             component={Link}
-            to={`${RoutesConst.CHAT}/${id}`}
+            to={`${ROUTES.CHAT}/${id}`}
             sx={{
                 '&.Mui-selected': {
                     background: (theme) => theme.palette.background.paper
@@ -40,7 +40,7 @@ export const ChatList = (): JSX.Element => {
         if (chatID) {
             const chats = chatList.filter(chat => chat.id === +chatID)
             if (chats.length === 0) {
-                navigate(RoutesConst.NO_CHAT, {replace: true})
+                navigate(ROUTES.NO_CHAT, {replace: true})
             }
         }
     }, [chatID, chatList, navigate])

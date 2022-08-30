@@ -1,6 +1,6 @@
 import {Box, Button, Typography} from "@mui/material";
 import {Link} from "react-router-dom";
-import {RoutesConst} from "../paths";
+import {ROUTES} from "../../../config/paths";
 
 export const ChatNotFound = (): JSX.Element => {
     return (
@@ -15,7 +15,7 @@ export const ChatNotFound = (): JSX.Element => {
             width: 'fit-content'
         }}>
             <Typography color='white' variant={'h1'}>Чат не найден</Typography>
-            <Button component={Link} to={RoutesConst.MAIN}>Перейти к списку всех чатов</Button>
+            <Button component={Link} to={ROUTES.MAIN}>Перейти к списку всех чатов</Button>
         </Box>
     )
 }

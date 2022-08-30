@@ -1,4 +1,4 @@
-export * from './Messenger/Messanger'
+export * from './MessengerChat/MessangerChat'
 export * from './Profile/Profile'
 export * from './NotFound/NotFound'
 export * from './Home/Home'

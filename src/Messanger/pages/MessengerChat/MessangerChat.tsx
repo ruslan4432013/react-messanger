@@ -3,16 +3,19 @@ import {useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
 
 // own components
-import {ChatList, MessageList, SendMessageFormContainer} from "../../components";
+
 
 // material ui components
 import {Box} from "@mui/material";
 
 //selectors
-import {getMessages} from "../../store/messages";
+import {getMessages} from "src/store/messages";
+import {ChatList} from "src/components";
+import {SendMessageFormContainer} from "./components/SendMessageForm";
+import {MessageList} from "./components/MessageList";
 
 
-export const Messanger = (): JSX.Element => {
+export const MessangerChat = (): JSX.Element => {
 
     const message = useSelector(getMessages)
     const {chatID} = useParams<{ chatID: string }>()

@@ -2,11 +2,11 @@ import {Box, Button, IconButton, Typography} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import {Fragment} from "react";
 import {Link} from 'react-router-dom'
-import {RoutesConst} from "../paths";
-import {AddChatModal} from "../../components";
+import {ROUTES} from "../../../config/paths";
+import {AddChatModal} from "../../../components";
 import {useSelector} from "react-redux";
-import {getChats} from "../../store/chats/selectors";
-import {removeAllMessagesFromChatById, removeChat} from "../../store";
+import {getChats} from "../../../store/chats/selectors";
+import {removeAllMessagesFromChatById, removeChat} from "../../../store";
 
 
 export const Home = (): JSX.Element => {
@@ -38,7 +38,7 @@ export const Home = (): JSX.Element => {
                 {chatList.map(chat => (
                     <Fragment key={chat.id}>
                         <Button component={Link}
-                                to={`${RoutesConst.CHAT}/${chat.id}`}
+                                to={`${ROUTES.CHAT}/${chat.id}`}
                                 size={'large'}
                                 variant={'outlined'}
                                 sx={{

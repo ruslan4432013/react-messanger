@@ -1,4 +1,4 @@
-export enum RoutesConst {
+export enum ROUTES {
     MAIN = '/',
     PROFILE = '/profile',
     LOGOUT = '/logout',

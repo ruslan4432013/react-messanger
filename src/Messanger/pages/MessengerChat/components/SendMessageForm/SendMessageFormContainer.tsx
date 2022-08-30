@@ -1,10 +1,10 @@
 import {ChangeEvent, SyntheticEvent, useCallback, useEffect, useRef, useState} from "react";
-import {addMessage, AppDispatch} from "../../store";
+import {addMessage, AppDispatch} from "src/store";
 import {useDispatch, useSelector} from "react-redux";
-import {getMessages} from "../../store/messages";
-import {getUserName} from "../../store/profile/selectors";
+import {getMessages} from "src/store/messages";
+import {getUserName} from "src/store/profile/selectors";
 import {useParams} from "react-router-dom";
-import {sendResponseFromBot} from "../../store/messages";
+import {sendResponseFromBot} from "src/store/messages";
 import {SendMessageForm} from "./SendMessageForm";
 
 export const SendMessageFormContainer = (): JSX.Element => {

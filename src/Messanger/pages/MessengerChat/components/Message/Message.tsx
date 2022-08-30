@@ -1,6 +1,6 @@
 import styles from './Message.module.scss'
 import cn from 'classnames'
-import {MessageType} from "../../types/MessageType";
+import {MessageType} from "../../../../../types/MessageType";
 
 
 export const Message = ({author: messageAuthor, text, user}: MessageType & { user: string }): JSX.Element => {

@@ -1,1 +1,2 @@
-export * from './authors'
+export {AUTHORS} from './authors'
+export {ROUTES} from './paths'

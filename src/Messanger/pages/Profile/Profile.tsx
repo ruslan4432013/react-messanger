@@ -1,7 +1,7 @@
 import {Box, Typography, FormGroup, FormControlLabel, Switch} from "@mui/material";
 import {useSelector} from "react-redux";
-import {switchShowName} from "../../store";
-import {getIsShowing} from "../../store/profile/selectors";
+import {switchShowName} from "../../../store";
+import {getIsShowing} from "../../../store/profile/selectors";
 
 
 export const Profile = (): JSX.Element => {
