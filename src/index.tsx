@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Messanger from './Messanger/Messanger';
+import {Messanger} from './Messanger/Messanger';
 import reportWebVitals from './reportWebVitals';
 import {theme} from "./styles/createTheme";
 import {ThemeProvider} from "@mui/material";

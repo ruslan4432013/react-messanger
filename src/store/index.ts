@@ -5,16 +5,19 @@ import {messageActions, messageReducer} from "./messages";
 import thunk, {ThunkDispatch} from "redux-thunk";
 import {persistStore, persistReducer} from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
+import {coinsReducer} from "./coins";
 
 const persistConfig = {
     key: 'root',
     storage,
+    blacklist: ['coins']
 }
 
 const rootReducer = combineReducers({
     profile: profileReducer,
     chats: chatReducer,
-    messages: messageReducer
+    messages: messageReducer,
+    coins: coinsReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

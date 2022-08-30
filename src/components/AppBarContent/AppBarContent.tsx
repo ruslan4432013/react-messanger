@@ -11,13 +11,12 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import {useState, MouseEvent} from "react";
 import {Link as RouterLink} from "react-router-dom";
-import {ROUTES} from "../../config/paths";
+import {ROUTES} from "src/config";
 
 
-
-
-const settings = {
+const routesInProfileIconDropdown = {
     Profile: ROUTES.PROFILE,
+    Coins: ROUTES.COINS,
     Logout: ROUTES.LOGOUT
 }
 
@@ -139,7 +138,7 @@ export const AppBarContent = () => {
                         open={Boolean(anchorElUser)}
                         onClose={handleCloseUserMenu}
                     >
-                        {Object.entries(settings).map(([name, path]) => (
+                        {Object.entries(routesInProfileIconDropdown).map(([name, path]) => (
                             <MenuItem key={name} onClick={handleCloseUserMenu}>
                                 <Typography
                                     textAlign="center"

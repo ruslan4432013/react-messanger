@@ -8,10 +8,11 @@ import {
     Route,
 } from "react-router-dom";
 import {Home, MessangerChat, NotFound, Profile, ChatNotFound} from "./pages";
-import {ROUTES} from "../config/paths";
+import {ROUTES} from "src/config";
+import CryptoCoins from "./pages/CryptoCoins";
 
 
-function Messanger() {
+export const Messanger = () => {
 
     return (
 
@@ -28,6 +29,7 @@ function Messanger() {
                                element={<MessangerChat/>}/>
                         <Route path={ROUTES.PROFILE} element={<Profile/>}/>
                         <Route path={ROUTES.NO_CHAT} element={<ChatNotFound/>}/>
+                        <Route path={ROUTES.COINS} element={<CryptoCoins/>}/>
                         <Route path='*' element={<NotFound/>}/>
                     </Routes>
                 </Box>
@@ -36,5 +38,3 @@ function Messanger() {
 
     );
 }
-
-export default Messanger;
