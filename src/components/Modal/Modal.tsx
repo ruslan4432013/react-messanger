@@ -24,7 +24,7 @@ type CustomModalProps = {
 }
 
 export const CustomModal = ({open, handleClose}: CustomModalProps) => {
-    const [chatName, setChatName] = useState<string>()
+    const [chatName, setChatName] = useState<string>('')
 
     return (
         <>
