@@ -19,6 +19,9 @@ const messageSlice = createSlice({
             } else {
                 state[chatID] = [message]
             }
+        },
+        removeAllMessagesFromChatById(state, action: PayloadAction<number>) {
+            delete state[action.payload]
         }
     },
     extraReducers: (builder) => {

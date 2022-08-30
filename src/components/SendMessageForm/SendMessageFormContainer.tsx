@@ -23,7 +23,9 @@ export const SendMessageFormContainer = (): JSX.Element => {
         inputRef.current?.focus()
     }, [inputRef])
 
+
     const createNewMessage = useCallback((message: string) => {
+
         const newMessage = {
             _id: Array.isArray(messageList) ? messageList.length : 0,
             author: author,

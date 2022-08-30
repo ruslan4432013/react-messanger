@@ -6,12 +6,16 @@ import {RoutesConst} from "../paths";
 import {AddChatModal} from "../../components";
 import {useSelector} from "react-redux";
 import {getChats} from "../../store/chats/selectors";
-import {removeChat} from "../../store";
+import {removeAllMessagesFromChatById, removeChat} from "../../store";
 
 
 export const Home = (): JSX.Element => {
 
     const chatList = useSelector(getChats)
+    const removeChatHandler = (id: number) => {
+        removeAllMessagesFromChatById(id)
+        removeChat(id)
+    }
 
     return (
         <Box sx={{
@@ -27,7 +31,7 @@ export const Home = (): JSX.Element => {
                     display: 'grid',
                     gridTemplateColumns: '200px 30px',
                     columnGap: '20px',
-                    alignItems:'flex-start',
+                    alignItems: 'flex-start',
 
                 }}
             >
@@ -46,10 +50,11 @@ export const Home = (): JSX.Element => {
                         >
                             {chat.name}
                         </Button>
-                        <IconButton onClick={() => removeChat(chat.id)}
-                                    color="error"
-                                    edge="end"
-                                    aria-label="delete">
+                        <IconButton
+                            onClick={() => removeChatHandler(chat.id)}
+                            color="error"
+                            edge="end"
+                            aria-label="delete">
                             <DeleteIcon/>
                         </IconButton>
                     </Fragment>)

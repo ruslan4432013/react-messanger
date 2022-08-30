@@ -40,6 +40,7 @@ export const {
     addChat,
     removeChat,
     switchShowName,
+    removeAllMessagesFromChatById,
     setName
 } = actions
 

@@ -1,10 +1,11 @@
-import {createSlice} from '@reduxjs/toolkit'
+import { createSlice} from '@reduxjs/toolkit'
 import type {PayloadAction} from '@reduxjs/toolkit'
 import {ChatItemType} from "../../types/ChatListType";
 import {chatListMock} from "../../mock/ChatListMock";
 
 
 const initialState = chatListMock as ChatItemType[]
+
 
 const chatsSlice = createSlice({
     name: 'counter',
@@ -22,7 +23,7 @@ const chatsSlice = createSlice({
                 state.splice(index, 1)
             }
         },
-    },
+    }
 })
 
 export const chatActions = chatsSlice.actions
