@@ -10,6 +10,9 @@ import {
 import {Home, MessangerChat, NotFound, Profile, ChatNotFound} from "./pages";
 import {ROUTES} from "src/config";
 import CryptoCoins from "./pages/CryptoCoins";
+import {Login} from "./pages/Auth/Login/Login";
+import {Register} from "./pages/Auth/Register/Register";
+import {Logout} from "./pages/Logout/Logout";
 
 
 export const Messanger = () => {
@@ -30,6 +33,11 @@ export const Messanger = () => {
                         <Route path={ROUTES.PROFILE} element={<Profile/>}/>
                         <Route path={ROUTES.NO_CHAT} element={<ChatNotFound/>}/>
                         <Route path={ROUTES.COINS} element={<CryptoCoins/>}/>
+
+                        <Route path={ROUTES.AUTH.LOGIN} element={<Login/>}/>
+                        <Route path={ROUTES.AUTH.REGISTER} element={<Register/>}/>
+                        <Route path={ROUTES.LOGOUT} element={<Logout/>}/>
+
                         <Route path='*' element={<NotFound/>}/>
                     </Routes>
                 </Box>

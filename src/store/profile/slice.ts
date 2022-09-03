@@ -1,13 +1,19 @@
-import { createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import type {User} from '@firebase/auth/dist';
 
 
 export type ProfileState = {
-    showName: boolean
     name: string
+    showName: boolean
+    isAuth: boolean
 }
 
 
-const initialState = {showName: false, name: 'Неопознанный енот'} as ProfileState
+const initialState = {
+    name: 'Неопознанный енот',
+    showName: false,
+    isAuth: false
+} as ProfileState
 
 
 const profileSlice = createSlice({
@@ -17,8 +23,20 @@ const profileSlice = createSlice({
         switchShowName(state) {
             state.showName = !state.showName
         },
-        setName(state, action: PayloadAction<string>) {
-            state.name = action.payload
+        registerUser(state, action: PayloadAction<User>) {
+            const {email} = action.payload
+
+            if (email) {
+                state.name = email
+                state.isAuth = true
+            }
+        },
+        dropAuthState(state) {
+            state.isAuth = false
+        },
+        logout(state) {
+            state.isAuth = false
+            state.name = 'Неопознанный енот'
         }
     },
 })

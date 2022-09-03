@@ -9,20 +9,36 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import {useState, MouseEvent} from "react";
+import {useState, MouseEvent, useMemo} from "react";
 import {Link as RouterLink} from "react-router-dom";
 import {ROUTES} from "src/config";
+import {useSelector} from "react-redux";
+import {getAuthStatus} from "../../store/profile/selectors";
 
 
 const routesInProfileIconDropdown = {
     Profile: ROUTES.PROFILE,
     Coins: ROUTES.COINS,
-    Logout: ROUTES.LOGOUT
 }
+
+const getAuthLink = (isAuth: boolean) => {
+
+    const name = isAuth ? 'Logout' : 'Login'
+    const route = isAuth ? ROUTES.LOGOUT : ROUTES.AUTH.LOGIN
+
+    return ({
+        name,
+        route
+    })
+
+}
+
 
 export const AppBarContent = () => {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+    const isAuth = useSelector(getAuthStatus)
+    const authLink = useMemo(() => getAuthLink(isAuth), [isAuth])
 
     const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -151,8 +167,21 @@ export const AppBarContent = () => {
                                 >
                                     {name}
                                 </Typography>
-                            </MenuItem>
-                        ))}
+                            </MenuItem>)
+                        )}
+                        <MenuItem onClick={handleCloseUserMenu}>
+                            <Typography
+                                textAlign="center"
+                                component={RouterLink}
+                                sx={{
+                                    color: 'white',
+                                    textDecoration: 'none',
+                                }}
+                                to={authLink.route}
+                            >
+                                {authLink.name}
+                            </Typography>
+                        </MenuItem>
                     </Menu>
                 </Box>
             </Toolbar>

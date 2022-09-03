@@ -1,23 +1,25 @@
-import { createSlice} from '@reduxjs/toolkit'
+import {createSlice} from '@reduxjs/toolkit'
 import type {PayloadAction} from '@reduxjs/toolkit'
-import {ChatItemType} from "../../types/ChatListType";
-import {chatListMock} from "../../mock/ChatListMock";
+import {ChatItemType} from "src/types/ChatListType";
 
-
-const initialState = chatListMock as ChatItemType[]
+const initialState = [] as ChatItemType[]
 
 
 const chatsSlice = createSlice({
-    name: 'counter',
+    name: 'chats',
     initialState,
     reducers: {
-        addChat(state, action: PayloadAction<string>) {
-            const lastId = state.slice(-1)[0]?.id
+        addChat(state, action: PayloadAction<{chatID: string, chatName: string}>) {
 
-            state.push({id: lastId ? lastId + 1 : 1, name: action.payload})
+            const {chatID, chatName} = action.payload
+            state.push({id: chatID, name: chatName})
 
         },
-        removeChat(state, action: PayloadAction<number>) {
+        setChats(state, action: PayloadAction<ChatItemType[]>) {
+            return action.payload
+        },
+
+        removeChatAction(state, action: PayloadAction<string>) {
             const index = state.findIndex(el => el.id === action.payload)
             if (index !== -1) {
                 state.splice(index, 1)

@@ -4,7 +4,9 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import {ChangeEvent, useState} from "react";
 import {ListItemButton, ListItemText, TextField} from "@mui/material";
-import {addChat} from "../../store";
+import {useDispatch} from "react-redux";
+import {createNewChatInFirebase} from "../../store/chats/actions";
+import {AppDispatch} from "../../store";
 
 const style = {
     position: 'absolute',
@@ -25,6 +27,17 @@ type CustomModalProps = {
 
 export const CustomModal = ({open, handleClose}: CustomModalProps) => {
     const [chatName, setChatName] = useState<string>('')
+    const dispatch: AppDispatch = useDispatch()
+
+    const clickAddChatHandler = () => {
+        if (chatName) {
+            dispatch(createNewChatInFirebase(chatName))
+            handleClose()
+            setChatName(() => '')
+        }
+
+    }
+
 
     return (
         <>
@@ -70,13 +83,7 @@ export const CustomModal = ({open, handleClose}: CustomModalProps) => {
                             }}
                         />
                         <Button
-                            onClick={() => {
-                                if (chatName) {
-                                    addChat(chatName)
-                                    handleClose()
-                                    setChatName(() => '')
-                                }
-                            }}
+                            onClick={clickAddChatHandler}
                             sx={(theme) => ({
                                 background: theme.palette.background.paper,
                                 color: theme.palette.primary.contrastText,

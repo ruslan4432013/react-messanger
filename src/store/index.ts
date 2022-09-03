@@ -1,4 +1,4 @@
-import {AnyAction, bindActionCreators, combineReducers, configureStore} from '@reduxjs/toolkit'
+import {AnyAction, combineReducers, configureStore} from '@reduxjs/toolkit'
 import {profileActions, profileReducer} from "./profile/slice";
 import {chatActions, chatReducer} from './chats/slice'
 import {messageActions, messageReducer} from "./messages";
@@ -10,7 +10,7 @@ import {coinsReducer} from "./coins";
 const persistConfig = {
     key: 'root',
     storage,
-    blacklist: ['coins']
+    whitelist: ['coins']
 }
 
 const rootReducer = combineReducers({
@@ -31,20 +31,10 @@ export const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = ThunkDispatch<RootState, any, AnyAction>
 
-const actions = bindActionCreators({
-    ...chatActions,
-    ...profileActions,
-    ...messageActions
-}, store.dispatch)
 
+export const {switchShowName, logout, registerUser} = profileActions
+export const {addChat, setChats, removeChatAction} = chatActions
+export const {removeAllMessagesFromChatById, setMessages} = messageActions
 
-export const {
-    addMessage,
-    addChat,
-    removeChat,
-    switchShowName,
-    removeAllMessagesFromChatById,
-    setName
-} = actions
 
 export const persistor = persistStore(store)

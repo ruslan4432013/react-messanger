@@ -1,7 +1,7 @@
 import {ChangeEvent, SyntheticEvent, useCallback, useEffect, useRef, useState} from "react";
-import {addMessage, AppDispatch} from "src/store";
+import {AppDispatch} from "src/store";
 import {useDispatch, useSelector} from "react-redux";
-import {getMessages} from "src/store/messages";
+import {sendMessageWithFireBase} from "src/store/messages";
 import {getUserName} from "src/store/profile/selectors";
 import {useParams} from "react-router-dom";
 import {sendResponseFromBot} from "src/store/messages";
@@ -11,13 +11,11 @@ export const SendMessageFormContainer = (): JSX.Element => {
 
     const [message, setMessage] = useState<string>('')
     const inputRef = useRef<HTMLInputElement>(null)
-    const messages = useSelector(getMessages)
     const author = useSelector(getUserName)
     const {chatID} = useParams<{ chatID: string }>()
     const dispatch: AppDispatch = useDispatch()
 
-    const currentChatID = chatID ? +chatID : 0
-    const messageList = chatID && messages[+chatID]
+
 
     useEffect(() => {
         inputRef.current?.focus()
@@ -25,26 +23,24 @@ export const SendMessageFormContainer = (): JSX.Element => {
 
 
     const createNewMessage = useCallback((message: string) => {
+        dispatch(sendMessageWithFireBase({
+            chatID: chatID || '0',
+            messageText: message,
+            author: author
+        }))
 
-        const newMessage = {
-            _id: Array.isArray(messageList) ? messageList.length : 0,
-            author: author,
-            text: message
-        }
 
-        addMessage({
-            chatID: chatID ? +chatID : 0,
-            message: newMessage
-        })
-    }, [author, chatID, messageList])
+    }, [author, chatID, dispatch])
 
 
     const handleSubmit = (e: SyntheticEvent): void => {
         e.preventDefault()
+
         message && createNewMessage(message)
+        chatID && dispatch(sendResponseFromBot(chatID))
+
         setMessage('')
         inputRef.current?.focus()
-        dispatch(sendResponseFromBot(currentChatID))
     }
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
