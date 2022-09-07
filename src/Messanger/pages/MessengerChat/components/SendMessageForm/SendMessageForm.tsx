@@ -24,6 +24,7 @@ export const SendMessageForm = forwardRef<HTMLInputElement, SendMessageFormProps
             }}
         >
             <TextField
+                data-testid="input-message-text"
                 inputRef={inputRef}
                 onChange={handleChange}
                 value={message}
@@ -42,7 +43,10 @@ export const SendMessageForm = forwardRef<HTMLInputElement, SendMessageFormProps
                     }
                 }}
             />
-            <Button onClick={handleSubmit} sx={(theme) => ({
+            <Button
+                onClick={handleSubmit}
+                data-testid="input-button"
+                sx={(theme) => ({
                 background: theme.palette.background.paper,
                 color: theme.palette.primary.contrastText,
                 '&:hover': {

@@ -9,7 +9,7 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import {useState, MouseEvent, useMemo} from "react";
+import {useState, MouseEvent, useMemo, memo} from "react";
 import {Link as RouterLink} from "react-router-dom";
 import {ROUTES} from "src/config";
 import {useSelector} from "react-redux";
@@ -188,3 +188,6 @@ export const AppBarContent = () => {
         </Box>
     )
 }
+
+
+export const AppBarContentWithMemo = memo(AppBarContent)

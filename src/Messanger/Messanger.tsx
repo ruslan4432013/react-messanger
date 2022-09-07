@@ -1,6 +1,6 @@
 import React from 'react';
 import './Messanger.scss';
-import {AppBarContent} from "../components";
+import {AppBarContentWithMemo} from "../components";
 import {AppBar, Box} from "@mui/material";
 import {
     BrowserRouter,
@@ -22,7 +22,7 @@ export const Messanger = () => {
         <div className="App">
             <BrowserRouter>
                 <AppBar position="fixed">
-                    <AppBarContent/>
+                    <AppBarContentWithMemo/>
                 </AppBar>
                 <Box sx={{display: 'flex', height: '100%', pt: '64px'}}>
                     <Routes>
