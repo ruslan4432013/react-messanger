@@ -23,7 +23,7 @@ const profileSlice = createSlice({
         switchShowName(state) {
             state.showName = !state.showName
         },
-        registerUser(state, action: PayloadAction<User>) {
+        registerUser(state, action: PayloadAction<Partial<User>>) {
             const {email} = action.payload
 
             if (email) {
