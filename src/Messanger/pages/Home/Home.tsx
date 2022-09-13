@@ -1,21 +1,35 @@
 import {Box, Button, IconButton, Typography} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
-import {Fragment} from "react";
+import {Fragment, useEffect} from "react";
 import {Link} from 'react-router-dom'
-import {ROUTES} from "../../../config/paths";
-import {AddChatModal} from "../../../components";
-import {useSelector} from "react-redux";
-import {getChats} from "../../../store/chats/selectors";
-import {removeAllMessagesFromChatById, removeChat} from "../../../store";
+import {ROUTES} from "src/config";
+import {AddChatModal} from "src/components";
+import {AppDispatch, setChats} from "src/store";
+import {useDispatch, useSelector} from "react-redux";
+import {getChats} from "src/store/chats/selectors";
+import {removeChatFromFirebase} from "src/store/chats/actions";
+import {setListenerDB} from "src/utils/firebase-db-utils";
 
 
-export const Home = (): JSX.Element => {
+export const Home = () => {
 
     const chatList = useSelector(getChats)
-    const removeChatHandler = (id: number) => {
-        removeAllMessagesFromChatById(id)
-        removeChat(id)
+    const dispatch: AppDispatch = useDispatch()
+
+    const removeChatHandler = (id: string) => {
+        dispatch(removeChatFromFirebase(id))
     }
+
+    useEffect(() => {
+        setListenerDB('', (data) => {
+
+            if (data) {
+                const correctChatsForReducerState = Object.values(data).map(el => ({id: el.chatID, name: el.chatName}))
+                dispatch(setChats(correctChatsForReducerState))
+            }
+        })
+    }, [dispatch])
+
 
     return (
         <Box sx={{

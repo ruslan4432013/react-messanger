@@ -38,7 +38,7 @@ export const ChatList = (): JSX.Element => {
 
     useEffect(() => {
         if (chatID) {
-            const chats = chatList.filter(chat => chat.id === +chatID)
+            const chats = chatList.filter(chat => chat.id === chatID)
             if (chats.length === 0) {
                 navigate(ROUTES.NO_CHAT, {replace: true})
             }

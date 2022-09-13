@@ -1,6 +1,6 @@
-import {MessageType} from "../../types/MessageType";
+import {MessageType} from "src/types/MessageType";
 
 export type TPayloadAddMessage = {
-    chatID: number
+    chatID: string
     message: MessageType
 }
